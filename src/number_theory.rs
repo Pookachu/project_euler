@@ -1,7 +1,8 @@
 pub trait NumberTheory {
     fn factors(&self) -> Vec<u64>;
-    fn is_prime(&self) -> bool;
     fn prime_factors(&self) -> Vec<u64>;
+    fn is_prime(&self) -> bool;
+    fn is_palindrome(&self) -> bool;
 }
 
 impl NumberTheory for u64 {
@@ -68,5 +69,19 @@ impl NumberTheory for u64 {
 
         factors
 
+    }
+
+    fn is_palindrome(&self) -> bool {
+        let n = *self;
+        let mut original = n;
+        let mut reversed = 0;
+
+        while original > 0 {
+            let digit = original % 10;     // get last digit
+            reversed = reversed * 10 + digit;   // append digit to the reversed number
+            original /= 10;                     // remove last digit
+        }
+
+        n == reversed
     }
 }

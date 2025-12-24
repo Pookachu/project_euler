@@ -1,8 +1,14 @@
+pub mod primes;
+
+pub use self::primes::sieve;
+
 pub trait NumberTheory {
     fn factors(&self) -> Vec<u64>;
     fn prime_factors(&self) -> Vec<u64>;
     fn is_prime(&self) -> bool;
     fn is_palindrome(&self) -> bool;
+    fn gcd(&self, other: &Self) -> Self;
+    fn lcm(&self, other: &Self) -> Self;
 }
 
 impl NumberTheory for u64 {
@@ -84,4 +90,25 @@ impl NumberTheory for u64 {
 
         n == reversed
     }
+
+    // Euclid's Algorithm for GCD
+    fn gcd(&self, other: &u64) -> u64 {
+        let mut a = *self;
+        let mut b = *other;
+        while b != 0 {
+            let temp = b;
+            b = a % b;
+            a = temp;
+        }
+        a
+    }
+
+    fn lcm(&self, other: &u64) -> u64 {
+        if *self == 0 || *other == 0 {
+            return 0;
+        }
+        // Calculate (a * b) / gcd(a, b)
+        (self / self.gcd(other)) * other
+    }
+    
 }

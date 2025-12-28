@@ -1,11 +1,11 @@
-use project_euler::NumberTheory;
+use project_euler::prelude::*;
 
 fn main() {
     let mut largest_palindrome = 0;
 
     for i in (1..1000).rev() {
         for j in (1..1000).rev() {
-            let product = i*j;
+            let product = i * j;
 
             if product < largest_palindrome {
                 break;

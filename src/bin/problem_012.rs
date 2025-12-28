@@ -1,4 +1,4 @@
-use project_euler::NumberTheory;
+use project_euler::prelude::*;
 
 fn main() {
     // Create the infinite iterator of triangle numbers
@@ -8,8 +8,7 @@ fn main() {
     });
 
     // Use .find() to get the first one with > 500 factors
-    let result = triangle_numbers
-        .find(|n| n.factors().len() > 500 );
+    let result = triangle_numbers.find(|n| n.divisor_count() > 500);
 
     match result {
         Some(n) => println!("Found it: {}", n),
